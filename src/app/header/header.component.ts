@@ -9,7 +9,6 @@ export class HeaderComponent {
     @Output() onFeatureSelected: EventEmitter<string> = new EventEmitter<string>();
 
     onSelect(feature: string) {
-        console.log('feature', feature)
         this.onFeatureSelected.emit(feature);
     }
 }

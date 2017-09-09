@@ -14,7 +14,7 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 //services
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-
+import { RecipeService } from './recipes/recipe.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     DropdownDirective
   ],
   imports: [BrowserModule],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
