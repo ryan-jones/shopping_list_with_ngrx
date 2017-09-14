@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 
 //components
 import { AppComponent } from './app.component';
@@ -28,7 +29,7 @@ import { RecipeService } from './recipes/recipe.service';
     ShoppingListEditComponent,
     DropdownDirective
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
 })
