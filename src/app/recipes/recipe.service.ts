@@ -1,11 +1,10 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Ingredients } from '../shared/shared-models/ingredients.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
       'Chicken Laksa',
@@ -15,6 +14,16 @@ export class RecipeService {
         new Ingredients('chicken', 1),
         new Ingredients('laksa paste', 1),
         new Ingredients('rice noodles', 10)
+      ]
+    ),
+    new Recipe(
+      'Chicken Masala',
+      'A great Indian dish',
+      'https://www.google.es/imgres?imgurl=https%3A%2F%2Findianhealthyrecipes.com%2Fwp-content%2Fuploads%2F2017%2F05%2Fchicken-masala.jpg&imgrefurl=https%3A%2F%2Findianhealthyrecipes.com%2Fchicken-masala-recipe%2F&docid=FzerfRZpOOOTwM&tbnid=3-Acafny7HTXDM%3A&vet=10ahUKEwj32-q5lcXWAhWGExoKHeCBDmoQMwiLAigAMAA..i&w=670&h=447&bih=776&biw=1440&q=chicken%20masala&ved=0ahUKEwj32-q5lcXWAhWGExoKHeCBDmoQMwiLAigAMAA&iact=mrc&uact=8',
+      [
+        new Ingredients('chicken', 1),
+        new Ingredients('Masala paste', 1),
+        new Ingredients('Basmati rice', 10)
       ]
     )
   ];
