@@ -13,29 +13,46 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editMode: boolean = false;
   editedItemIndex: number;
-  editedItem: Ingredients
+  editedItem: Ingredients;
 
   constructor(private shopService: ShoppingListService) {}
 
   ngOnInit() {
-    this.subscription = this.shopService.startedEditing.subscribe((index:number) => {
-      this.editMode = true;
-      this.editedItemIndex = index;
-      this.editedItem = this.shopService.getIngredient(index);
-      this.shopListForm.setValue({
-        name: this.editedItem.name,
-        amount: this.editedItem.amount
-      })
-    });
+    this.subscription = this.shopService.startedEditing.subscribe(
+      (index: number) => {
+        this.editMode = true;
+        this.editedItemIndex = index;
+
+        this.editedItem = this.shopService.getIngredient(index);
+        this.shopListForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount
+        });
+      }
+    );
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  onAddItem(form: NgForm) {
+  onSubmitItem(form: NgForm) {
     const value = form.value;
     const newIngredient = new Ingredients(value.name, value.amount);
-    this.shopService.addIngredient(newIngredient);
+    this.editMode
+      ? this.shopService.updateIngredient(this.editedItemIndex, newIngredient)
+      : this.shopService.addIngredient(newIngredient);
+    this.editMode = false;
+    form.reset();
+  }
+
+  onClear() {
+    this.shopListForm.reset();
+    this.editMode = false;
+  }
+
+  onDelete() {
+    this.shopService.deleteIngredient(this.editedItemIndex);
+    this.onClear()
   }
 }
