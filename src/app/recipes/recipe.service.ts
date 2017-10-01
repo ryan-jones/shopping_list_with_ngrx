@@ -2,9 +2,11 @@ import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
 import { Ingredients } from '../shared/shared-models/ingredients.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
+  recipeChanges = new Subject<Recipe[]>();
   private recipes: Recipe[] = [
     new Recipe(
       'Chicken Laksa',
@@ -19,7 +21,7 @@ export class RecipeService {
     new Recipe(
       'Chicken Masala',
       'A great Indian dish',
-      'https://www.google.es/imgres?imgurl=https%3A%2F%2Findianhealthyrecipes.com%2Fwp-content%2Fuploads%2F2017%2F05%2Fchicken-masala.jpg&imgrefurl=https%3A%2F%2Findianhealthyrecipes.com%2Fchicken-masala-recipe%2F&docid=FzerfRZpOOOTwM&tbnid=3-Acafny7HTXDM%3A&vet=10ahUKEwj32-q5lcXWAhWGExoKHeCBDmoQMwiLAigAMAA..i&w=670&h=447&bih=776&biw=1440&q=chicken%20masala&ved=0ahUKEwj32-q5lcXWAhWGExoKHeCBDmoQMwiLAigAMAA&iact=mrc&uact=8',
+      'https://indianhealthyrecipes.com/wp-content/uploads/2017/05/chicken-masala.jpg',
       [
         new Ingredients('chicken', 1),
         new Ingredients('Masala paste', 1),
@@ -39,5 +41,20 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredients[]) {
     this.shopService.addIngredients(ingredients);
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipeChanges.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipeChanges.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipeChanges.next(this.recipes.slice());
   }
 }

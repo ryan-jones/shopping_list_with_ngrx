@@ -1,0 +1,11 @@
+.form-array{
+  margin-top: 10px;
+}
+
+input.ng-invalid.ng-touched, text-area.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+input.ng-valid.ng-touched, text-area.ng-valid.ng-touched {
+  border: 1px solid green;
+}
