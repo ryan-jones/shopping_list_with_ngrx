@@ -16,11 +16,12 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 //services
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipeService } from './recipes/recipe.service';
 import { InitialComponent } from './recipes/initial/initial.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { DataStorageService } from './shared/data-storage.service';
+import { Store, StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers';
 
 @NgModule({
   declarations: [
@@ -41,9 +42,10 @@ import { DataStorageService } from './shared/data-storage.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService],
+  providers: [RecipeService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
