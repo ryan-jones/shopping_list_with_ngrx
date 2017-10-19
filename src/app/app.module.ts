@@ -22,6 +22,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
 import { DataStorageService } from './shared/data-storage.service';
 import { Store, StoreModule } from '@ngrx/store';
 import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers';
+import { reducers } from './store/app.reducer'
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot(reducers) //found in app.reducer
   ],
   providers: [RecipeService, DataStorageService],
   bootstrap: [AppComponent]

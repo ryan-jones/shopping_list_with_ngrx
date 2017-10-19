@@ -1,9 +1,7 @@
 import * as ShoppingListActions from './shopping-list.actions';
 import { Ingredients } from '../../shared/shared-models/ingredients.model';
 
-export interface AppState {
-  shoppingList: State;
-}
+
 
 export interface State {
   ingredients: Ingredients[];
@@ -15,6 +13,7 @@ const initialState: State = {
   editedIngredient: null,
   editedIngredientIndex: -1
 };
+
 export function shoppingListReducer(
   state = initialState,
   action: ShoppingListActions.ShoppingListActions
@@ -25,11 +24,13 @@ export function shoppingListReducer(
         ...state,
         ingredients: [...state.ingredients, action.payload]
       };
+
     case ShoppingListActions.ADD_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, ...action.payload]
       };
+
     case ShoppingListActions.UPDATE_INGREDIENT:
       const ingredient = state.ingredients[state.editedIngredientIndex];
       const updatedIngredient = {
@@ -40,15 +41,21 @@ export function shoppingListReducer(
       ingredients[state.editedIngredientIndex] = updatedIngredient;
       return {
         ...state,
-        ingredients: ingredients
+        ingredients: ingredients,
+        editedIngredient: null,
+        editedIngredientIndex: -1
       };
+
     case ShoppingListActions.DELETE_INGREDIENT:
       const oldIngredients = [...state.ingredients];
       oldIngredients.splice(state.editedIngredientIndex, 1);
       return {
         ...state,
-        ingredients: oldIngredients
+        ingredients: oldIngredients,
+        editedIngredient: null,
+        editedIngredientIndex: -1
       };
+
     case ShoppingListActions.START_EDIT:
       const editedIngredient = { ...state.ingredients[action.payload] };
       return {
@@ -56,6 +63,14 @@ export function shoppingListReducer(
         editedIngredient: editedIngredient,
         editedIngredientIndex: action.payload
       };
+
+    case ShoppingListActions.STOP_EDIT:
+      return {
+        ...state,
+        editedIngredient: null,
+        editedIngredientIndex: -1
+      };
+
     default:
       return state;
   }
