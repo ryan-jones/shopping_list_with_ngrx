@@ -1,24 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RecipesModule } from './recipes/recipe.module';
+import { SharedModule } from './shared/shared.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 //components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '../app/header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
-import { RecipesDetailsComponent } from './recipes/recipes-details/recipes-details.component';
-import { RecipesItemComponent } from './recipes/recipes-list/recipes-item/recipes-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { InitialComponent } from './recipes/initial/initial.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-
-import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 //services
 import { RecipeService } from './recipes/recipe.service';
@@ -31,32 +21,24 @@ import { Store, StoreModule } from '@ngrx/store';
 import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers';
 import { reducers } from './store/app.reducer';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    RecipesComponent,
-    RecipesListComponent,
-    RecipesDetailsComponent,
-    RecipesItemComponent,
-    ShoppingListComponent,
-    ShoppingListEditComponent,
-    DropdownDirective,
-    InitialComponent,
-    RecipeEditComponent,
-    SignupComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     HttpModule,
+    RecipesModule,
+    ShoppingListModule,
     StoreModule.forRoot(reducers) //found in app.reducer
   ],
-  providers: [RecipeService, DataStorageService, AuthService, AuthGuard],
+  providers: [
+    RecipeService,
+    DataStorageService,
+    AuthService,
+    AuthGuard,
+    SharedModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
