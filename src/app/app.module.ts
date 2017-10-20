@@ -13,19 +13,24 @@ import { RecipesDetailsComponent } from './recipes/recipes-details/recipes-detai
 import { RecipesItemComponent } from './recipes/recipes-list/recipes-item/recipes-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { InitialComponent } from './recipes/initial/initial.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+
 import { DropdownDirective } from './shared/directives/dropdown.directive';
 
 //services
 import { RecipeService } from './recipes/recipe.service';
-import { InitialComponent } from './recipes/initial/initial.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { DataStorageService } from './shared/data-storage.service';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
+
+//ngrx
 import { Store, StoreModule } from '@ngrx/store';
 import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers';
 import { reducers } from './store/app.reducer';
-import { SignupComponent } from './auth/signup/signup.component';
-import { AuthService } from './auth/auth.service';
-import { LoginComponent } from './auth/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +56,7 @@ import { LoginComponent } from './auth/login/login.component';
     HttpModule,
     StoreModule.forRoot(reducers) //found in app.reducer
   ],
-  providers: [RecipeService, DataStorageService, AuthService],
+  providers: [RecipeService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
