@@ -8,7 +8,7 @@ import { RecipesDetailsComponent } from './recipes-details/recipes-details.compo
 
 const recipesRoutes: Routes = [
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
     children: [
       { path: '', component: InitialComponent },

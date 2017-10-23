@@ -5,11 +5,13 @@ import { ShoppingListEditComponent } from './shopping-list-edit/shopping-list-ed
 import { NgModule } from '@angular/core';
 import { ShoppingListRoutingModule } from './shopping-routes';
 import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common/';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ShoppingListComponent, ShoppingListEditComponent],
   imports: [
-    ShoppingListRoutingModule, SharedModule
+    ShoppingListRoutingModule, CommonModule, FormsModule
   ]
 })
 export class ShoppingListModule {}

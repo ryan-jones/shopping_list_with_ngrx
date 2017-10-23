@@ -10,6 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     DropdownDirective
   ],
-  exports: [DropdownDirective, CommonModule, FormsModule, ReactiveFormsModule]
+  exports: [DropdownDirective, CommonModule, ReactiveFormsModule, FormsModule]
 })
 export class SharedModule {}

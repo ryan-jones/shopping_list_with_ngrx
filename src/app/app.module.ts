@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
-import { RecipesModule } from './recipes/recipe.module';
 import { SharedModule } from './shared/shared.module';
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
+
 
 //components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '../app/header/header.component';
+import { HomeComponent } from './home/home.component';
+
 
 //services
 import { RecipeService } from './recipes/recipe.service';
@@ -22,14 +23,12 @@ import { shoppingListReducer } from './shopping-list/ngrx/shopping-list.reducers
 import { reducers } from './store/app.reducer';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     HttpModule,
-    RecipesModule,
-    ShoppingListModule,
     StoreModule.forRoot(reducers) //found in app.reducer
   ],
   providers: [
