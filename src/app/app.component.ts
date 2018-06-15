@@ -6,12 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  selectedFeature: string;
+  public selectedFeature: string;
 
   ngOnInit() {
     this.selectedFeature = 'recipe';
   }
-  onNavigate(feature: string) {
-    this.selectedFeature = feature;
-  }
+  public onNavigate = (feature: string): string => this.selectedFeature = feature;
 }
