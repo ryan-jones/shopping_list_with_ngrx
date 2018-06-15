@@ -1,14 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'header',
-    templateUrl: './header.component.html',
+  // tslint:disable-next-line:component-selector
+  selector: 'header',
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent {
+  @Output() onFeatureSelected: EventEmitter<string> = new EventEmitter<string>();
 
-    @Output() onFeatureSelected: EventEmitter<string> = new EventEmitter<string>();
-
-    onSelect(feature: string) {
-        this.onFeatureSelected.emit(feature);
-    }
+  public onSelect = (feature: string): void => this.onFeatureSelected.emit(feature);
 }

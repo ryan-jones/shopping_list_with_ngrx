@@ -1,5 +1,5 @@
 import { Ingredients } from '../shared/shared-models/ingredients.model';
-import { EventEmitter } from "@angular/core";
+import { EventEmitter } from '@angular/core';
 
 export class ShoppingListService {
   ingredientsChanged = new EventEmitter<Ingredients[]>();
@@ -8,18 +8,16 @@ export class ShoppingListService {
     new Ingredients('Mangos', 6)
   ];
 
-  getIngredients() {
-    return this.ingredients.slice();
-  }
+  public getIngredients = (): Ingredients[] => this.ingredients.slice();
 
-  addIngredient(ingredient: Ingredients) {
+  public addIngredient(ingredient: Ingredients): void {
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.emit([...this.ingredients]);
   }
 
 // ... syntax takes values in the array ingredients and returns them as a list for this.ingredients to push incrementally
-  addIngredients(ingredients: Ingredients[]) {
-      this.ingredients.push(...ingredients)
-      this.ingredientsChanged.emit(this.ingredients.slice());
+  public addIngredients(ingredients: Ingredients[]): void {
+      this.ingredients.push(...ingredients);
+      this.ingredientsChanged.emit([...this.ingredients]);
   }
 }

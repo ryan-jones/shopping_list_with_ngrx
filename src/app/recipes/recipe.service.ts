@@ -5,7 +5,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 @Injectable()
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
+  public recipeSelected = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
       'Chicken Laksa',
@@ -20,15 +20,10 @@ export class RecipeService {
   ];
   constructor(private shopService: ShoppingListService) {}
 
-  getRecipes() {
-    return this.recipes.slice();
-  }
+  public getRecipes = (): Recipe[] => this.recipes.slice();
 
-  getRecipe(index: number) {
-    return this.recipes[index];
-  }
+  public getRecipe = (index: number): Recipe => this.recipes[index];
 
-  addIngredientsToShoppingList(ingredients: Ingredients[]) {
-    this.shopService.addIngredients(ingredients);
-  }
+  public addIngredientsToShoppingList = (ingredients: Ingredients[]): void => this.shopService.addIngredients(ingredients);
+
 }

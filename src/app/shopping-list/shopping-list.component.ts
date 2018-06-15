@@ -7,16 +7,12 @@ import { ShoppingListService } from './shopping-list.service';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients: Ingredients[];
+  public ingredients: Ingredients[];
 
   constructor(private shopService: ShoppingListService) {}
 
   ngOnInit() {
     this.ingredients = this.shopService.getIngredients();
-    this.shopService.ingredientsChanged.subscribe(
-      (ingredients: Ingredients[]) => {
-        this.ingredients = ingredients;
-      }
-    );
+    this.shopService.ingredientsChanged.subscribe((ingredients: Ingredients[]) => this.ingredients = ingredients);
   }
 }
