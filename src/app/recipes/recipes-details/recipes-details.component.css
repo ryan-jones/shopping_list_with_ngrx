@@ -1,7 +1,7 @@
 img {
-    max-height: 20vh;
+  max-height: 20vh;
 }
 
 li > a {
-    cursor: pointer;
+  cursor: pointer;
 }

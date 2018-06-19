@@ -4,8 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import * as ShoppingListActions from '../ngrx/shopping-list.actions';
-import * as fromShoppingList from '../ngrx/shopping-list.reducers'
-import * as fromApp from '../../store/app.reducer'
+import * as fromApp from '../../store/app.reducer';
 @Component({
   selector: 'app-shopping-list-edit',
   templateUrl: './shopping-list-edit.component.html',
@@ -13,19 +12,17 @@ import * as fromApp from '../../store/app.reducer'
 })
 export class ShoppingListEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') shopListForm: NgForm;
-  subscription: Subscription;
-  editMode: boolean = false;
-  editedItem: Ingredients;
+  private subscription: Subscription;
+  private editMode = false;
+  private editedItem: Ingredients;
 
-  constructor(
-    private store: Store<fromApp.AppState>
-  ) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
    this.subscription = this.store.select('shoppingList').subscribe(
       data => {
-        if (data.editedIngredientIndex > -1){
-          this.editedItem = data.editedIngredient
+        if (data.editedIngredientIndex > -1) {
+          this.editedItem = data.editedIngredient;
           this.editMode = true;
           this.shopListForm.setValue({
           name: this.editedItem.name,
@@ -35,35 +32,31 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
           this.editMode = false;
         }
       }
-    )
+    );
   }
 
   ngOnDestroy() {
-    this.store.dispatch(new ShoppingListActions.StopEdit())
+    this.store.dispatch(new ShoppingListActions.StopEdit());
     this.subscription.unsubscribe();
   }
 
-  onSubmitItem(form: NgForm) {
+  public onSubmitItem(form: NgForm): void {
     const value = form.value;
     const newIngredient = new Ingredients(value.name, value.amount);
     this.editMode
       ? this.store.dispatch(new ShoppingListActions.UpdateIngredient({ ingredient: newIngredient }))
-      : this.store.dispatch(
-          new ShoppingListActions.AddIngredient(newIngredient)
-        );
+      : this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     this.editMode = false;
     form.reset();
   }
 
-  onClear() {
+  public onClear(): void {
     this.shopListForm.reset();
     this.editMode = false;
   }
 
-  onDelete() {
-    this.store.dispatch(
-      new ShoppingListActions.DeleteIngredient()
-    );
+  public onDelete(): void {
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient());
     this.onClear();
   }
 }

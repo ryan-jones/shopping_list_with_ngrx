@@ -8,11 +8,11 @@
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
-          <input type="text" 
-            id="amount" 
-            name="amount" 
-            class="form-control" 
-            ngModel 
+          <input type="text"
+            id="amount"
+            name="amount"
+            class="form-control"
+            ngModel
             required pattern="ˆ[1-9]+[0-9]*$">
           <!-- pattern is a validator that requires all values to be greater than zero-->
         </div>
@@ -20,9 +20,8 @@
       <div class="row">
         <div class="col-xs-12">
           <button class="btn btn-success" type="submit">{{ editMode ? 'Update' : 'Add'}}</button>
-          <button *ngIf="editMode" class="btn btn-danger" type="button" (click)="onDelete()">Delete</button>
-          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
-
+          <button *ngIf="editMode" (click)="onDelete()" class="btn btn-danger" type="button" >Delete</button>
+          <button (click)="onClear()" class="btn btn-primary" type="button">Clear</button>
         </div>
       </div>
     </form>

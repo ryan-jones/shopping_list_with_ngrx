@@ -4,29 +4,31 @@ import { Response } from '@angular/http';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
   @Output()
-  onFeatureSelected: EventEmitter<string> = new EventEmitter<string>();
+  private onFeatureSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private dataStorageService: DataStorageService, private authService: AuthService) {}
 
-  onSelect(feature: string) {
+  public onSelect(feature: string): void {
     this.onFeatureSelected.emit(feature);
   }
 
-  onSave() {
+  public onSave(): void {
     this.dataStorageService.storeRecipes().subscribe((res: Response) => {
-      console.log('response', res)
-    })
+      console.log('response', res);
+    });
   }
 
-  onLogout(){
+  public onLogout(): void {
     this.authService.logout();
   }
-  onFetchData(){
-    this.dataStorageService.getRecipes()
+
+  public onFetchData() {
+    this.dataStorageService.getRecipes();
   }
 }

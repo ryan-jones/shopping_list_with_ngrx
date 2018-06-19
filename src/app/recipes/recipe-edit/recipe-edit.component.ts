@@ -18,10 +18,9 @@ export class RecipeEditComponent implements OnInit {
 
   private recipeForm: FormGroup;
   private id: number;
-  private editMode: boolean = false;
+  private editMode = false;
 
   ngOnInit() {
-    debugger
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
@@ -29,11 +28,11 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  private initForm() {
+  private initForm(): void {
     let recipeName = '';
     let recipeImage = '';
     let recipeDescription = '';
-    let recipeIngredients = new FormArray([]);
+    const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
@@ -63,29 +62,25 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  private onSubmit() {
+  public onSubmit(): void {
     const newRecipe = new Recipe(
       this.recipeForm.value['name'],
       this.recipeForm.value['description'],
       this.recipeForm.value['imagePath'],
       this.recipeForm.value['ingredients']
     );
-    //this.recipeForm.value can be passed instead of newRecipe because it holds all the properties we expect for the newRecipe
+    // this.recipeForm.value can be passed instead of newRecipe because it holds all the properties we expect for the newRecipe
     this.editMode
       ? this.recipeService.updateRecipe(this.id, this.recipeForm.value)
       : this.recipeService.addRecipe(newRecipe);
-      this.onCancel();
+    this.onCancel();
   }
 
-  private onCancel() {
-    this.router.navigate(['../'], {relativeTo: this.route})
-  }
+  private onCancel = () => this.router.navigate(['../'], {relativeTo: this.route});
 
-  private onDelete(index: number){
-    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
-  }
+  public onDelete = (index: number): void => (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
 
-  private onAddIngredient() {
+  public onAddIngredient(): void {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
         name: new FormControl(null, Validators.required),

@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  selectedFeature: string;
+  public selectedFeature: string;
 
   ngOnInit() {
     firebase.initializeApp({
@@ -15,7 +15,5 @@ export class AppComponent implements OnInit {
     });
     this.selectedFeature = 'recipe';
   }
-  onNavigate(feature: string) {
-    this.selectedFeature = feature;
-  }
+  public onNavigate = (feature: string): string => this.selectedFeature = feature;
 }
